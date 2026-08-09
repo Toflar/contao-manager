@@ -9,8 +9,22 @@
                 </div>
                 <fieldset class="maintenance__actions">
                     <loading-spinner class="maintenance__loader" v-if="loading && !supported" />
-                    <loading-button class="widget-button widget-button--primary widget-button--maintenance" :loading="loading" :disabled="!supported" v-else-if="!enabled" @click="enableMaintenanceMode">{{ $t('ui.maintenance.maintenanceMode.enable') }}</loading-button>
-                    <loading-button class="widget-button widget-button--alert widget-button--maintenance" :loading="loading" :disabled="!supported" v-else @click="disableMaintenanceMode">{{ $t('ui.maintenance.maintenanceMode.disable') }}</loading-button>
+                    <loading-button
+                        class="widget-button widget-button--primary widget-button--maintenance"
+                        :loading="loading"
+                        :disabled="!supported"
+                        v-else-if="!enabled"
+                        @click="enableMaintenanceMode"
+                        >{{ $t('ui.maintenance.maintenanceMode.enable') }}</loading-button
+                    >
+                    <loading-button
+                        class="widget-button widget-button--alert widget-button--maintenance"
+                        :loading="loading"
+                        :disabled="!supported"
+                        v-else
+                        @click="disableMaintenanceMode"
+                        >{{ $t('ui.maintenance.maintenanceMode.disable') }}</loading-button
+                    >
                 </fieldset>
             </div>
         </section>
@@ -58,8 +72,7 @@ export default {
         if (response.status === 200) {
             const commands = Object.keys(response.data?.cli?.commands);
 
-            this.supported = commands.includes('contao:maintenance-mode') ||
-                (commands.includes('lexik:maintenance:lock') && commands.includes('lexik:maintenance:unlock'));
+            this.supported = commands.includes('contao:maintenance-mode') || (commands.includes('lexik:maintenance:lock') && commands.includes('lexik:maintenance:unlock'));
 
             if (this.supported) {
                 this.enabled = await this.$store.dispatch('contao/maintenance-mode/isEnabled');

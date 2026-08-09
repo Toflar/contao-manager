@@ -1,18 +1,13 @@
 <template>
     <div class="widget widget-select" :class="{ 'widget--error': error, 'widget--required': required }">
-        <label v-if="label" :for="'ctrl_'+name">{{ label }}</label>
-        <select
-            ref="input"
-            :id="label ? 'ctrl_'+name : ''"
-            :name="name"
-            :disabled="disabled"
-            :required="required"
-            @change="input($event.target.value)"
-        >
+        <label v-if="label" :for="'ctrl_' + name">{{ label }}</label>
+        <select ref="input" :id="label ? 'ctrl_' + name : ''" :name="name" :disabled="disabled" :required="required" @change="input($event.target.value)">
             <option value="" v-if="includeBlank">{{ $t('ui.widget.blankOption') }}</option>
             <template v-for="(group, key) in options">
                 <optgroup v-if="group.options" :label="group.label" :key="key">
-                    <option v-for="option in group.options" :value="option.value" :disabled="option.disabled" :selected="option.value === modelValue" :key="option.value">{{ option.label }}</option>
+                    <option v-for="option in group.options" :value="option.value" :disabled="option.disabled" :selected="option.value === modelValue" :key="option.value">
+                        {{ option.label }}
+                    </option>
                 </optgroup>
                 <option :value="group.value" :disabled="group.disabled" :selected="group.value === modelValue" :key="group.value" v-else>{{ group.label }}</option>
             </template>

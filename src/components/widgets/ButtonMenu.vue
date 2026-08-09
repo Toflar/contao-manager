@@ -1,9 +1,6 @@
 <template>
     <div class="button-menu">
-        <button
-            :class="classes"
-            @click="toggle"
-        ></button>
+        <button :class="classes" @click="toggle"></button>
         <div ref="menu" class="button-menu__menu" v-show="showMenu" tabindex="-1" @focusout="close" @click="close">
             <slot />
         </div>
@@ -108,7 +105,7 @@ export default {
         border-radius: var(--border-radius);
 
         &:before {
-            content: "";
+            content: '';
             position: absolute;
             top: -5px;
             right: 15px;

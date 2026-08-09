@@ -13,7 +13,8 @@
                 :title="$t('ui.recovery.console')"
                 :operations="[{ status: 'error', summary: 'vendor/bin/contao-console list', console: this.error }]"
                 :console-output="error"
-                show-console force-console
+                show-console
+                force-console
                 v-if="console"
             />
 
@@ -22,15 +23,21 @@
             <div class="view-recovery__option">
                 <h3>{{ $t('ui.recovery.repairHeadline') }}</h3>
                 <p>{{ $t('ui.recovery.repairDescription') }}</p>
-                <p><strong>{{ $t('ui.recovery.repairWarning') }}</strong></p>
+                <p>
+                    <strong>{{ $t('ui.recovery.repairWarning') }}</strong>
+                </p>
                 <p class="view-recovery__failed" v-if="repairFailed">{{ $t('ui.recovery.repairFailed') }}</p>
-                <loading-button inline color="alert" icon="run" :disabled="repairFailed" :loading="repairStarted && !repairFailed" @click="runRepair">{{ $t('ui.recovery.repairButton') }}</loading-button>
+                <loading-button inline color="alert" icon="run" :disabled="repairFailed" :loading="repairStarted && !repairFailed" @click="runRepair">{{
+                    $t('ui.recovery.repairButton')
+                }}</loading-button>
             </div>
 
             <div class="view-recovery__option">
                 <h3>{{ $t('ui.recovery.safeModeHeadline') }}</h3>
                 <p>{{ $t('ui.recovery.safeModeDescription') }}</p>
-                <button class="widget-button widget-button--inline widget-button--primary" :disabled="repairStarted && !repairFailed" @click="runSafeMode">{{ $t('ui.recovery.safeModeButton') }}</button>
+                <button class="widget-button widget-button--inline widget-button--primary" :disabled="repairStarted && !repairFailed" @click="runSafeMode">
+                    {{ $t('ui.recovery.safeModeButton') }}
+                </button>
             </div>
         </main>
     </boxed-layout>
@@ -63,11 +70,7 @@ export default {
             this.repairStarted = true;
 
             let task;
-            const tasks = [
-                { name: 'contao/rebuild-cache' },
-                { name: 'composer/install' },
-                { name: 'composer/install', config: { 'remove-vendor': true } },
-            ];
+            const tasks = [{ name: 'contao/rebuild-cache' }, { name: 'composer/install' }, { name: 'composer/install', config: { 'remove-vendor': true } }];
 
             while ((task = tasks.shift()) !== undefined) {
                 try {
@@ -105,7 +108,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .view-recovery {
     &__header {

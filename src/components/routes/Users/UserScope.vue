@@ -4,12 +4,13 @@
         <!-- eslint-disable vue/no-v-for-template-key -->
         <template v-for="scope in all" :key="scope">
             <check-box
-                class="user-scope__item" :class="{ 'user-scope__item--required': readonly || isRequired(scope) }"
+                class="user-scope__item"
+                :class="{ 'user-scope__item--required': readonly || isRequired(scope) }"
                 :name="`${scope}_${randomKey}`"
                 :label="$t(`ui.scope.${scope}`)"
                 :disabled="readonly || !isRequested(scope) || isRequired(scope)"
                 :model-value="model[scope]"
-                @update:model-value="value => setEnabled(scope, value)"
+                @update:model-value="(value) => setEnabled(scope, value)"
             />
         </template>
     </fieldset>

@@ -1,9 +1,5 @@
 <template>
-    <popup-overlay
-        class="logout-warning"
-        :headline="$t('ui.logout.headline')"
-        :headlineType="countdown === 0 ? 'alert' : null"
-    >
+    <popup-overlay class="logout-warning" :headline="$t('ui.logout.headline')" :headlineType="countdown === 0 ? 'alert' : null">
         <template v-if="countdown > 0">
             <p class="logout-warning__text">{{ $t('ui.logout.warning') }}</p>
             <p class="logout-warning__countdown">{{ minutes }}:{{ seconds }}</p>
@@ -75,7 +71,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .logout-warning {
     text-align: center;

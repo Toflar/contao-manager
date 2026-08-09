@@ -20,12 +20,26 @@
             @focus="$emit('focus')"
             @blur="$emit('blur')"
         />
-        <button type="button" class="widget__password-toggle" :class="{ 'widget__password-toggle--visible': showPassword, 'widget__password-toggle--hidden': !showPassword }" :title="$t(`ui.widget.${showPassword ? 'hidePassword' : 'showPassword'}`)" @click="togglePassword" v-if="type === 'password'">
-            <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        <button
+            type="button"
+            class="widget__password-toggle"
+            :class="{ 'widget__password-toggle--visible': showPassword, 'widget__password-toggle--hidden': !showPassword }"
+            :title="$t(`ui.widget.${showPassword ? 'hidePassword' : 'showPassword'}`)"
+            @click="togglePassword"
+            v-if="type === 'password'"
+        >
+            <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path
+                    d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                />
+            </svg>
         </button>
         <p class="widget__error" v-if="error">{{ error }}</p>
         <div class="widget__description" :class="{ 'widget__description--disabled': disabled }" v-if="description || $slots.description">
-            <slot name="description"><p>{{ description }}</p></slot>
+            <slot name="description"
+                ><p>{{ description }}</p></slot
+            >
         </div>
     </div>
 </template>
@@ -110,7 +124,7 @@ export default {
             display: none;
         }
 
-        input[type=number] {
+        input[type='number'] {
             appearance: textfield !important;
         }
 

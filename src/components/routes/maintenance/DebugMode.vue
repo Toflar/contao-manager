@@ -14,13 +14,23 @@
                     <loading-spinner class="maintenance__loader" />
                 </fieldset>
                 <fieldset class="maintenance__actions" v-else-if="supportsJwtCookie">
-                    <loading-button class="widget-button widget-button--primary widget-button--show" :loading="loading" v-if="!hasJwtDebug" @click="enableJwtDebugMode">{{ $t('ui.maintenance.debugMode.activate') }}</loading-button>
-                    <loading-button class="widget-button widget-button--alert widget-button--hide" :loading="loading" v-else @click="removeJwtCookie">{{ $t('ui.maintenance.debugMode.deactivate') }}</loading-button>
+                    <loading-button class="widget-button widget-button--primary widget-button--show" :loading="loading" v-if="!hasJwtDebug" @click="enableJwtDebugMode">{{
+                        $t('ui.maintenance.debugMode.activate')
+                    }}</loading-button>
+                    <loading-button class="widget-button widget-button--alert widget-button--hide" :loading="loading" v-else @click="removeJwtCookie">{{
+                        $t('ui.maintenance.debugMode.deactivate')
+                    }}</loading-button>
                 </fieldset>
                 <fieldset class="maintenance__actions" v-else-if="supportsAccessKey">
-                    <loading-button class="widget-button widget-button--primary widget-button--show" :loading="loading" v-if="!hasAccessKey" @click="setAccessKey">{{ $t('ui.maintenance.debugMode.activate') }}</loading-button>
-                    <loading-button class="widget-button widget-button--alert widget-button--hide" :loading="loading" v-else @click="removeAccessKey">{{ $t('ui.maintenance.debugMode.deactivate') }}</loading-button>
-                    <loading-button class="widget-button widget-button--edit" v-if="hasAccessKey" :loading="loading" @click="setAccessKey">{{ $t('ui.maintenance.debugMode.credentials') }}</loading-button>
+                    <loading-button class="widget-button widget-button--primary widget-button--show" :loading="loading" v-if="!hasAccessKey" @click="setAccessKey">{{
+                        $t('ui.maintenance.debugMode.activate')
+                    }}</loading-button>
+                    <loading-button class="widget-button widget-button--alert widget-button--hide" :loading="loading" v-else @click="removeAccessKey">{{
+                        $t('ui.maintenance.debugMode.deactivate')
+                    }}</loading-button>
+                    <loading-button class="widget-button widget-button--edit" v-if="hasAccessKey" :loading="loading" @click="setAccessKey">{{
+                        $t('ui.maintenance.debugMode.credentials')
+                    }}</loading-button>
                 </fieldset>
             </div>
         </section>
@@ -95,18 +105,19 @@ export default {
                 this.supportsAccessKey = false;
                 this.loading = false;
             },
-            () => this.$store.dispatch('contao/access-key/get').then(
-                () => {
-                    this.supportsJwtCookie = false;
-                    this.supportsAccessKey = true;
-                    this.loading = false;
-                },
-                () => {
-                    this.supportsJwtCookie = false;
-                    this.supportsAccessKey = false;
-                    this.loading = false;
-                },
-            ),
+            () =>
+                this.$store.dispatch('contao/access-key/get').then(
+                    () => {
+                        this.supportsJwtCookie = false;
+                        this.supportsAccessKey = true;
+                        this.loading = false;
+                    },
+                    () => {
+                        this.supportsJwtCookie = false;
+                        this.supportsAccessKey = false;
+                        this.loading = false;
+                    },
+                ),
         );
     },
 };

@@ -18,15 +18,23 @@
 
                         <text-field
                             ref="url"
-                            name="url" type="url"
-                            :label="$t('ui.setup.database-connection.url')" placeholder="mysql://user:password@server:port/database"
-                            required :pattern="urlPattern" validate
+                            name="url"
+                            type="url"
+                            :label="$t('ui.setup.database-connection.url')"
+                            placeholder="mysql://user:password@server:port/database"
+                            required
+                            :pattern="urlPattern"
+                            validate
                             :disabled="processing"
-                            v-model="url" @keyup="validUrl=true" @blur="parseUrl"
+                            v-model="url"
+                            @keyup="validUrl = true"
+                            @blur="parseUrl"
                             :error="validUrl ? undefined : $t('ui.setup.database-connection.validUrl')"
                         />
 
-                        <div class="setup__or"><span>{{ $t('ui.setup.database-connection.or') }}</span></div>
+                        <div class="setup__or">
+                            <span>{{ $t('ui.setup.database-connection.or') }}</span>
+                        </div>
 
                         <text-field name="user" :label="$t('ui.setup.database-connection.user')" :disabled="processing" v-model="user" />
                         <text-field name="password" type="password" :label="$t('ui.setup.database-connection.password')" :disabled="processing" v-model="password" />
@@ -44,10 +52,16 @@
                 <div class="setup__fields">
                     <h2 class="setup__fieldtitle">{{ $t('ui.setup.database-connection.formTitle') }}</h2>
                     <i18n-t tag="p" keypath="ui.setup.database-connection.connected" class="setup__fielddesc" v-if="url">
-                        <template #database><i>{{ database }}</i></template>
-                        <template #server><i>{{ server }}</i></template>
+                        <template #database
+                            ><i>{{ database }}</i></template
+                        >
+                        <template #server
+                            ><i>{{ server }}</i></template
+                        >
                     </i18n-t>
-                    <button type="button" class="widget-button widget-button--edit widget-button--small" @click="currentState = 'edit'">{{ $t('ui.setup.database-connection.change') }}</button>
+                    <button type="button" class="widget-button widget-button--edit widget-button--small" @click="currentState = 'edit'">
+                        {{ $t('ui.setup.database-connection.change') }}
+                    </button>
                 </div>
 
                 <transition name="animate-flip" type="transition" mode="out-in">
@@ -59,8 +73,12 @@
                         </div>
                         <div class="setup__actions setup__actions--center">
                             <template v-if="status && status.total > 0">
-                                <button type="button" class="widget-button widget-button--inline" @click="$emit('continue')" v-if="!hasDatabaseError">{{ $t('ui.setup.database-connection.skip') }}</button>
-                                <button type="button" class="widget-button widget-button--inline widget-button--primary" @click="checkMigrations">{{ $t('ui.setup.database-connection.check') }}</button>
+                                <button type="button" class="widget-button widget-button--inline" @click="$emit('continue')" v-if="!hasDatabaseError">
+                                    {{ $t('ui.setup.database-connection.skip') }}
+                                </button>
+                                <button type="button" class="widget-button widget-button--inline widget-button--primary" @click="checkMigrations">
+                                    {{ $t('ui.setup.database-connection.check') }}
+                                </button>
                             </template>
                             <button type="button" class="widget-button widget-button--primary" @click="$emit('continue')" v-else>{{ $t('ui.setup.continue') }}</button>
                         </div>
@@ -69,11 +87,17 @@
                     <div v-else-if="backupRestored" v-bind:key="'restored'">
                         <div class="setup__fields">
                             <h2 class="setup__fieldtitle">{{ $t('ui.setup.database-connection.restoreTitle') }}</h2>
-                            <svg class="setup__check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z" /></svg>
+                            <svg class="setup__check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z"
+                                />
+                            </svg>
                             <p class="setup__fielddesc">{{ $t('ui.setup.database-connection.restored') }}</p>
                         </div>
                         <div class="setup__actions setup__actions--center">
-                            <button type="button" class="widget-button widget-button--primary" @click="$store.commit('contao/backup/setRestore', false)">{{ $t('ui.setup.continue') }}</button>
+                            <button type="button" class="widget-button widget-button--primary" @click="$store.commit('contao/backup/setRestore', false)">
+                                {{ $t('ui.setup.continue') }}
+                            </button>
                         </div>
                     </div>
 
@@ -91,8 +115,12 @@
                         </div>
 
                         <div class="setup__actions">
-                            <button type="button" class="widget-button widget-button--inline" @click="$store.commit('contao/backup/setRestore', false)">{{ $t('ui.setup.database-connection.skip') }}</button>
-                            <button type="button" class="widget-button widget-button--inline widget-button--primary" :disabled="files.length > 1 && !selection" @click="restore">{{ $t('ui.setup.database-connection.restore') }}</button>
+                            <button type="button" class="widget-button widget-button--inline" @click="$store.commit('contao/backup/setRestore', false)">
+                                {{ $t('ui.setup.database-connection.skip') }}
+                            </button>
+                            <button type="button" class="widget-button widget-button--inline widget-button--primary" :disabled="files.length > 1 && !selection" @click="restore">
+                                {{ $t('ui.setup.database-connection.restore') }}
+                            </button>
                         </div>
                     </div>
                 </transition>
@@ -312,7 +340,7 @@ export default {
         text-align: center;
 
         &:before {
-            content: "";
+            content: '';
             position: absolute;
             top: 0.8em;
             left: 0;

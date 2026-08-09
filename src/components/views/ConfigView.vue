@@ -11,12 +11,7 @@
                 <fieldset class="config-check__fields">
                     <legend class="config-check__fieldtitle">{{ $t('ui.server.config.formTitle') }}</legend>
                     <p class="config-check__fielddesc">{{ $t('ui.server.config.formText') }}</p>
-                    <text-field
-                        ref="cli"
-                        name="php_cli" :label="$t('ui.server.config.cli')"
-                        required :disabled="processing" :error="error"
-                        v-model="php_cli"
-                    />
+                    <text-field ref="cli" name="php_cli" :label="$t('ui.server.config.cli')" required :disabled="processing" :error="error" v-model="php_cli" />
                 </fieldset>
 
                 <fieldset class="config-check__fields">
@@ -100,7 +95,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .config-check {
     &__header {

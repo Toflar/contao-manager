@@ -3,26 +3,30 @@
         <Notivue v-slot="item"><Notification :item="item" /></Notivue>
 
         <div class="app-hint app-hint--alert" v-if="safeMode && view === 'ready'">
-            <strong class="app-hint__headline">{{ $t('ui.app.safeModeHeadline') }}</strong>&nbsp;
-            <span class="app-hint__description">{{ $t('ui.app.safeModeDescription') }}</span>&nbsp;
+            <strong class="app-hint__headline">{{ $t('ui.app.safeModeHeadline') }}</strong
+            >&nbsp; <span class="app-hint__description">{{ $t('ui.app.safeModeDescription') }}</span
+            >&nbsp;
             <button class="app-hint__link" @click="exitSafeMode">{{ $t('ui.app.safeModeExit') }}</button>
         </div>
 
         <div class="app-hint" v-else-if="limited">
-            <strong class="app-hint__headline">{{ $t('ui.app.limitedHeadline') }}</strong>&nbsp;
-            <span class="app-hint__description">{{ $t('ui.app.limitedDescription') }}</span>&nbsp;
+            <strong class="app-hint__headline">{{ $t('ui.app.limitedHeadline') }}</strong
+            >&nbsp; <span class="app-hint__description">{{ $t('ui.app.limitedDescription') }}</span
+            >&nbsp;
             <button class="app-hint__link" @click="logout">{{ $t('ui.app.limitedLogout') }}</button>
         </div>
 
         <div class="app-hint app-hint--warning" v-else-if="isInsecure">
-            <strong class="app-hint__headline">{{ $t('ui.app.httpsHeadline') }}</strong>&nbsp;
-            <span class="app-hint__description">{{ $t('ui.app.httpsDescription') }}</span>&nbsp;
+            <strong class="app-hint__headline">{{ $t('ui.app.httpsHeadline') }}</strong
+            >&nbsp; <span class="app-hint__description">{{ $t('ui.app.httpsDescription') }}</span
+            >&nbsp;
             <a :href="$t('ui.app.httpsHref')" target="_blank" class="app-hint__link">{{ $t('ui.app.httpsLink') }}</a>
         </div>
 
         <div class="app-hint app-hint--warning" v-else-if="loaded && username && !totpEnabled">
-            <strong class="app-hint__headline">{{ $t('ui.app.totpHeadline') }}</strong>&nbsp;
-            <span class="app-hint__description">{{ $t('ui.app.totpDescription') }}</span>&nbsp;
+            <strong class="app-hint__headline">{{ $t('ui.app.totpHeadline') }}</strong
+            >&nbsp; <span class="app-hint__description">{{ $t('ui.app.totpDescription') }}</span
+            >&nbsp;
             <button class="app-hint__link" @click="setupTotp">{{ $t('ui.app.totpSetup') }}</button>
         </div>
 
@@ -209,11 +213,11 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/layout";
-@use "~contao-package-list/src/assets/styles/forms";
-@use "~contao-package-list/src/assets/styles/animations";
-@use "~contao-package-list/src/assets/styles/defaults";
-@use "../assets/styles/defaults" as AppDefaults;
+@use '~contao-package-list/src/assets/styles/layout';
+@use '~contao-package-list/src/assets/styles/forms';
+@use '~contao-package-list/src/assets/styles/animations';
+@use '~contao-package-list/src/assets/styles/defaults';
+@use '../assets/styles/defaults' as AppDefaults;
 
 @import '~notivue/notifications.css';
 @import '~notivue/animations.css';
@@ -298,7 +302,7 @@ export default {
         'trash',
         'unlock',
         'update',
-        'upload',
+        'upload'
     );
 
     @each $buttonIcon in $icons {

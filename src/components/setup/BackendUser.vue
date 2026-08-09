@@ -14,7 +14,8 @@
                     :title="$t('ui.recovery.console')"
                     :operations="[{ status: 'error', summary: 'vendor/bin/contao-console contao:user:list', console: response.data.detail }]"
                     :console-output="response.data.detail"
-                    show-console force-console
+                    show-console
+                    force-console
                     v-if="response.status === 502"
                 />
             </div>
@@ -23,7 +24,11 @@
         <transition name="animate-flip" type="transition" mode="out-in" v-else>
             <main class="setup__form setup__form--center" v-if="hasUser" v-bind:key="'confirmation'">
                 <div class="setup__fields">
-                    <svg class="setup__check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z" /></svg>
+                    <svg class="setup__check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path
+                            d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z"
+                        />
+                    </svg>
                     <p class="setup__fielddesc">{{ $t('ui.setup.backend-user.success') }}</p>
                 </div>
                 <div class="setup__actions setup__actions--center">
@@ -37,24 +42,34 @@
                         <h2 class="setup__fieldtitle">{{ $t('ui.setup.backend-user.formTitle') }}</h2>
                         <p class="setup__fielddesc">{{ $t('ui.setup.backend-user.formText') }}</p>
 
-                        <text-field ref="username" name="username" :label="$t('ui.setup.backend-user.username')" :disabled="processing" required validate v-model="username"/>
-                        <text-field ref="name" name="name" :label="$t('ui.setup.backend-user.name')" :disabled="processing" required validate v-model="name"/>
+                        <text-field ref="username" name="username" :label="$t('ui.setup.backend-user.username')" :disabled="processing" required validate v-model="username" />
+                        <text-field ref="name" name="name" :label="$t('ui.setup.backend-user.name')" :disabled="processing" required validate v-model="name" />
                         <text-field
                             ref="email"
                             name="email"
                             type="email"
                             :label="$t('ui.setup.backend-user.email')"
                             :disabled="processing"
-                            required validate
-                            :error="errors.email" @focus="errors.email = ''" @blur="validateEmail"
+                            required
+                            validate
+                            :error="errors.email"
+                            @focus="errors.email = ''"
+                            @blur="validateEmail"
                             v-model="email"
                         />
                         <text-field
-                            ref="password" name="password" type="password"
-                            :label="$t('ui.setup.backend-user.password')" :placeholder="$t('ui.setup.backend-user.passwordPlaceholder')"
+                            ref="password"
+                            name="password"
+                            type="password"
+                            :label="$t('ui.setup.backend-user.password')"
+                            :placeholder="$t('ui.setup.backend-user.passwordPlaceholder')"
                             :disabled="processing"
-                            required minlength="8" validate
-                            :error="errors.password" @focus="errors.password = ''" @blur="validatePassword"
+                            required
+                            minlength="8"
+                            validate
+                            :error="errors.password"
+                            @focus="errors.password = ''"
+                            @blur="validatePassword"
                             v-model="password"
                         />
                     </div>
@@ -97,10 +112,7 @@ export default {
 
     methods: {
         validate() {
-            this.valid = this.$refs.username.checkValidity()
-                && this.$refs.name.checkValidity()
-                && this.$refs.email.checkValidity()
-                && this.$refs.password.checkValidity();
+            this.valid = this.$refs.username.checkValidity() && this.$refs.name.checkValidity() && this.$refs.email.checkValidity() && this.$refs.password.checkValidity();
         },
 
         validateEmail() {

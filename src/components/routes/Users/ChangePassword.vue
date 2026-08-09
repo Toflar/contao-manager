@@ -4,20 +4,25 @@
 
         <text-field
             ref="password"
-            name="current-password" type="password"
+            name="current-password"
+            type="password"
             :label="$t('ui.user-manager.currentPassword')"
-            required minlength="8"
+            required
+            minlength="8"
             autocomplete="current-password"
-            :error="error" @keyup="error = ''"
+            :error="error"
+            @keyup="error = ''"
             v-model="currentPassword"
             :disabled="loading"
         />
 
         <text-field
-            name="new-password" type="password"
+            name="new-password"
+            type="password"
             :label="$t('ui.user-manager.newPassword')"
             :placeholder="$t('ui.user-manager.passwordPlaceholder')"
-            required minlength="8"
+            required
+            minlength="8"
             autocomplete="new-password"
             v-model="newPassword"
             :disabled="loading"

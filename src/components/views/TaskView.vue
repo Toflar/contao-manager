@@ -10,7 +10,9 @@
                     {{ $t('ui.task.failedDescription1') }}<br />
                     {{ $t('ui.task.failedDescription2') }}
                 </p>
-                <p class="view-task__text"><br><a href="https://github.com/contao/contao-manager/issues/new" target="_blank">{{ $t('ui.task.reportProblem') }}</a></p>
+                <p class="view-task__text">
+                    <br /><a href="https://github.com/contao/contao-manager/issues/new" target="_blank">{{ $t('ui.task.reportProblem') }}</a>
+                </p>
 
                 <div class="view-task__actions">
                     <loading-button class="view-task__action" :loading="deletingTask" @click="deleteTask">{{ $t('ui.task.buttonClose') }}</loading-button>
@@ -28,11 +30,23 @@
             </template>
             <template v-else-if="hasTask">
                 <div class="view-task__actions">
-                    <loading-button class="view-task__action" color="alert" :loading="isAborting" @click="cancelTask" v-if="allowCancel && (isActive || isAborting)">{{ $t('ui.task.buttonCancel') }}</loading-button>
+                    <loading-button class="view-task__action" color="alert" :loading="isAborting" @click="cancelTask" v-if="allowCancel && (isActive || isAborting)">{{
+                        $t('ui.task.buttonCancel')
+                    }}</loading-button>
 
-                    <loading-button class="view-task__action" color="primary" :loading="loadingMigrations" :disabled="(supportsMigrations && !hasDatabaseChanges) || deletingTask" @click="updateDatabase" v-if="requiresAudit">{{ $t('ui.task.buttonAudit') }}</loading-button>
+                    <loading-button
+                        class="view-task__action"
+                        color="primary"
+                        :loading="loadingMigrations"
+                        :disabled="(supportsMigrations && !hasDatabaseChanges) || deletingTask"
+                        @click="updateDatabase"
+                        v-if="requiresAudit"
+                        >{{ $t('ui.task.buttonAudit') }}</loading-button
+                    >
 
-                    <loading-button class="view-task__action" :loading="deletingTask" @click="deleteTask" v-if="!isActive && !isAborting">{{ $t('ui.task.buttonConfirm') }}</loading-button>
+                    <loading-button class="view-task__action" :loading="deletingTask" @click="deleteTask" v-if="!isActive && !isAborting">{{
+                        $t('ui.task.buttonConfirm')
+                    }}</loading-button>
                     <check-box name="autoclose" :label="$t('ui.task.autoclose')" v-model="autoClose" v-if="isActive && allowAutoClose" />
                 </div>
             </template>
@@ -51,9 +65,13 @@
 
         <div class="view-task__sponsor" v-if="currentTask && currentTask.sponsor">
             <i18n-t keypath="ui.task.sponsor">
-                <template #sponsor><br /><a :href="currentTask.sponsor.link" target="_blank" rel="noreferrer noopener">{{ currentTask.sponsor.name }}</a></template>
+                <template #sponsor
+                    ><br /><a :href="currentTask.sponsor.link" target="_blank" rel="noreferrer noopener">{{ currentTask.sponsor.name }}</a></template
+                >
             </i18n-t>
-            <a href="https://to.contao.org/donate" target="_blank" rel="noreferrer noopener" class="view-task__donate"><img src="~contao-package-list/src/assets/images/funding.svg" alt="" width="20" height="20" /></a>
+            <a href="https://to.contao.org/donate" target="_blank" rel="noreferrer noopener" class="view-task__donate"
+                ><img src="~contao-package-list/src/assets/images/funding.svg" alt="" width="20" height="20"
+            /></a>
         </div>
     </boxed-layout>
 </template>
@@ -181,7 +199,7 @@ export default {
 </script>
 
 <style lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .view-task {
     &__header {

@@ -10,13 +10,17 @@
                 <i18n-t keypath="ui.account.intro1">
                     <template #readTheManualToGetStarted>
                         <i18n-t tag="strong" keypath="ui.account.introGetStarted">
-                            <template #readTheManual><a :href="`https://to.contao.org/docs/contao-manager?lang=${$i18n.locale}`" target="_blank">{{ $t('ui.account.introManual') }}</a></template>
+                            <template #readTheManual
+                                ><a :href="`https://to.contao.org/docs/contao-manager?lang=${$i18n.locale}`" target="_blank">{{ $t('ui.account.introManual') }}</a></template
+                            >
                         </i18n-t>
                     </template>
                 </i18n-t>
                 <br /><br />
                 <i18n-t keypath="ui.account.intro2">
-                    <template #ourGithubIssues><a href="https://github.com/contao/contao-manager/issues" target="_blank">{{ $t('ui.account.introIssues') }}</a></template>
+                    <template #ourGithubIssues
+                        ><a href="https://github.com/contao/contao-manager/issues" target="_blank">{{ $t('ui.account.introIssues') }}</a></template
+                    >
                 </i18n-t>
             </p>
         </header>
@@ -37,25 +41,34 @@
 
                     <fieldset class="view-account__fields">
                         <text-field
-                            ref="username" name="username"
+                            ref="username"
+                            name="username"
                             :label="$t('ui.account.username')"
                             :disabled="logging_in"
                             required
-                            :error="errors.username" @blur="errors.username = ''"
+                            :error="errors.username"
+                            @blur="errors.username = ''"
                             v-model="username"
                         />
                         <text-field
-                            ref="password" name="password" type="password"
-                            :label="$t('ui.account.password')" :placeholder="$t('ui.account.passwordPlaceholder')"
+                            ref="password"
+                            name="password"
+                            type="password"
+                            :label="$t('ui.account.password')"
+                            :placeholder="$t('ui.account.passwordPlaceholder')"
                             :disabled="logging_in"
-                            required pattern=".{8,}"
-                            :error="errors.password" @blur="validatePassword"
+                            required
+                            pattern=".{8,}"
+                            :error="errors.password"
+                            @blur="validatePassword"
                             v-model="password"
                             v-if="usePassword"
                         />
 
                         <button-group submit color="primary" :disabled="!valid" :loading="logging_in" :label="$t('ui.account.submit')" v-if="supportsWebAuthn">
-                            <button type="button" class="widget-button" :disabled="logging_in" @click="usePassword = !usePassword">{{ $t(`ui.account.${usePassword ? 'usePasskey' : 'usePassword'}`) }}</button>
+                            <button type="button" class="widget-button" :disabled="logging_in" @click="usePassword = !usePassword">
+                                {{ $t(`ui.account.${usePassword ? 'usePasskey' : 'usePassword'}`) }}
+                            </button>
                         </button-group>
                         <loading-button submit color="primary" :disabled="!valid" :loading="logging_in" v-else>{{ $t('ui.account.submit') }}</loading-button>
                         <button type="button" class="widget-button widget-button--anchor" @click="gotoLogin" v-if="isInvitation">{{ $t('ui.account.login') }}</button>
@@ -68,7 +81,9 @@
             <p>
                 {{ $t('ui.account.contribute1') }}<br />
                 <i18n-t keypath="ui.account.contribute2">
-                    <template #donate><a href="https://to.contao.org/donate" target="_blank">{{ $t('ui.account.contributeDonate') }}</a></template>
+                    <template #donate
+                        ><a href="https://to.contao.org/donate" target="_blank">{{ $t('ui.account.contributeDonate') }}</a></template
+                    >
                 </i18n-t>
             </p>
         </aside>
@@ -110,8 +125,7 @@ export default {
 
     methods: {
         validate() {
-            this.valid = this.$refs.username.checkValidity()
-                && (!this.usePassword || this.$refs.password.checkValidity());
+            this.valid = this.$refs.username.checkValidity() && (!this.usePassword || this.$refs.password.checkValidity());
         },
 
         validatePassword() {
@@ -211,7 +225,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .view-account {
     &__header {
@@ -303,8 +317,8 @@ export default {
                 font-weight: defaults.$font-weight-medium;
             }
 
-            input[type=text],
-            input[type=password],
+            input[type='text'],
+            input[type='password'],
             select {
                 width: 250px !important;
             }

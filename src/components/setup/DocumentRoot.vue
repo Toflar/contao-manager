@@ -6,14 +6,23 @@
             <p class="setup__warning" v-if="needsFix">{{ $t('ui.setup.document-root.warning') }}</p>
             <p class="setup__description">{{ $t('ui.setup.document-root.description1') }}</p>
             <p class="setup__description">{{ $t('ui.setup.document-root.description2') }}</p>
-            <a class="widget-button widget-button--inline widget-button--info widget-button--link" :href="`https://to.contao.org/docs/webroot?lang=${$i18n.locale}`" target="_blank">{{ $t('ui.setup.document-root.documentation') }}</a>
+            <a
+                class="widget-button widget-button--inline widget-button--info widget-button--link"
+                :href="`https://to.contao.org/docs/webroot?lang=${$i18n.locale}`"
+                target="_blank"
+                >{{ $t('ui.setup.document-root.documentation') }}</a
+            >
         </header>
 
         <transition :name="forceInstall ? 'none' : 'animate-flip'" type="transition" mode="out-in" v-if="projectDir !== null">
             <template v-if="needsFix || wantsFix">
                 <main class="setup__form setup__form--center" v-if="directoryUpdated" v-bind:key="'updated'">
                     <div class="setup__fields">
-                        <svg class="setup__check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z" /></svg>
+                        <svg class="setup__check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path
+                                d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z"
+                            />
+                        </svg>
                         <p class="setup__fielddesc">{{ $t('ui.setup.document-root.confirmation') }}</p>
                         <dl class="setup__directories">
                             <dt>{{ $t('ui.setup.document-root.currentRoot') }}</dt>
@@ -23,8 +32,12 @@
                             <dt>{{ $t('ui.setup.document-root.newRoot') }}</dt>
                             <dd v-if="isEmpty && (!wantsFix || !directory) && canUsePublicDir && usePublicDir">{{ projectDir }}<span>/public</span></dd>
                             <dd v-else-if="isEmpty && (!wantsFix || !directory)">{{ projectDir }}<span>/web</span></dd>
-                            <dd v-else-if="canUsePublicDir && usePublicDir">{{ projectDir }}<span>/{{ directory }}/public</span></dd>
-                            <dd v-else>{{ projectDir }}<span>/{{ directory }}/web</span></dd>
+                            <dd v-else-if="canUsePublicDir && usePublicDir">
+                                {{ projectDir }}<span>/{{ directory }}/public</span>
+                            </dd>
+                            <dd v-else>
+                                {{ projectDir }}<span>/{{ directory }}/web</span>
+                            </dd>
                         </dl>
                     </div>
                     <div class="setup__actions setup__actions--center">
@@ -40,13 +53,23 @@
                             <li v-for="file in conflicts.slice(0, 5)" :key="file">{{ file }}</li>
                             <li v-if="conflicts.length > 5">...</li>
                         </ul>
-                        <check-box name="ignoreConflicts" :label="$t('ui.setup.document-root.ignoreConflicts')" :disabled="processing" v-if="isPublic || isWeb" v-model="forceInstall" />
+                        <check-box
+                            name="ignoreConflicts"
+                            :label="$t('ui.setup.document-root.ignoreConflicts')"
+                            :disabled="processing"
+                            v-if="isPublic || isWeb"
+                            v-model="forceInstall"
+                        />
                     </div>
                     <div class="setup__actions setup__actions--center">
-                        <button class="widget-button widget-button--alert widget-button--run" v-if="forceInstall" @click="$emit('continue')">{{ $t('ui.server.contao.setup') }}</button>
+                        <button class="widget-button widget-button--alert widget-button--run" v-if="forceInstall" @click="$emit('continue')">
+                            {{ $t('ui.server.contao.setup') }}
+                        </button>
                         <template v-else>
                             <loading-button inline icon="update" :loading="processing" @click="init(false)">{{ $t('ui.setup.document-root.check') }}</loading-button>
-                            <button class="widget-button widget-button--inline widget-button--primary widget-button--gear" :disabled="processing" @click="conflicts = []">{{ $t('ui.setup.document-root.create') }}</button>
+                            <button class="widget-button widget-button--inline widget-button--primary widget-button--gear" :disabled="processing" @click="conflicts = []">
+                                {{ $t('ui.setup.document-root.create') }}
+                            </button>
                         </template>
                     </div>
                 </main>
@@ -56,11 +79,18 @@
                     <!-- prefetch the update icon for the confirmation page -->
                     <div class="setup__fields">
                         <h2 class="setup__fieldtitle">{{ $t('ui.setup.document-root.formTitle') }}</h2>
-                        <p class="setup__fielddesc">{{ $t('ui.setup.document-root.formText1') }} <u>{{ $t('ui.setup.document-root.formText2') }}</u></p>
+                        <p class="setup__fielddesc">
+                            {{ $t('ui.setup.document-root.formText1') }} <u>{{ $t('ui.setup.document-root.formText2') }}</u>
+                        </p>
 
                         <text-field
-                            ref="directory" name="directory" :label="$t('ui.setup.document-root.directory')"
-                            :error="directoryError" :required="!isEmpty" pattern="^[^/]+$" validate
+                            ref="directory"
+                            name="directory"
+                            :label="$t('ui.setup.document-root.directory')"
+                            :error="directoryError"
+                            :required="!isEmpty"
+                            pattern="^[^/]+$"
+                            validate
                             v-model="directory"
                             v-if="!isEmpty || wantsFix"
                         />
@@ -72,15 +102,30 @@
                             <dd v-else-if="isPublic">{{ projectDir }}{{ directorySeparator }}public</dd>
                             <dd v-else>{{ projectDir }}</dd>
                             <dt>{{ $t('ui.setup.document-root.newRoot') }}</dt>
-                            <dd v-if="isEmpty && (!wantsFix || !directory) && canUsePublicDir && usePublicDir">{{ projectDir }}<span>{{ directorySeparator }}public</span></dd>
-                            <dd v-else-if="isEmpty && (!wantsFix || !directory)">{{ projectDir }}<span>{{ directorySeparator }}web</span></dd>
-                            <dd v-else-if="canUsePublicDir && usePublicDir">{{ projectDir }}<span>{{ directorySeparator }}{{ directory }}{{ directorySeparator }}public</span></dd>
-                            <dd v-else>{{ projectDir }}<span>{{ directorySeparator }}{{ directory }}{{ directorySeparator }}web</span></dd>
+                            <dd v-if="isEmpty && (!wantsFix || !directory) && canUsePublicDir && usePublicDir">
+                                {{ projectDir }}<span>{{ directorySeparator }}public</span>
+                            </dd>
+                            <dd v-else-if="isEmpty && (!wantsFix || !directory)">
+                                {{ projectDir }}<span>{{ directorySeparator }}web</span>
+                            </dd>
+                            <dd v-else-if="canUsePublicDir && usePublicDir">
+                                {{ projectDir }}<span>{{ directorySeparator }}{{ directory }}{{ directorySeparator }}public</span>
+                            </dd>
+                            <dd v-else>
+                                {{ projectDir }}<span>{{ directorySeparator }}{{ directory }}{{ directorySeparator }}web</span>
+                            </dd>
                         </dl>
                         <check-box name="autoconfig" :label="$t('ui.setup.document-root.autoconfig')" :disabled="processing" v-model="autoconfig" />
                     </div>
                     <div class="setup__actions setup__actions--center">
-                        <loading-button color="primary" icon="run" :loading="processing" :disabled="!autoconfig || !!directoryError || (wantsFix && !directory && ((isPublic && usePublicDir) || (isWeb && !usePublicDir)))" @click="setupDocroot">{{ $t('ui.setup.document-root.finish') }}</loading-button>
+                        <loading-button
+                            color="primary"
+                            icon="run"
+                            :loading="processing"
+                            :disabled="!autoconfig || !!directoryError || (wantsFix && !directory && ((isPublic && usePublicDir) || (isWeb && !usePublicDir)))"
+                            @click="setupDocroot"
+                            >{{ $t('ui.setup.document-root.finish') }}</loading-button
+                        >
                         <button type="button" class="widget-button" :disabled="processing" @click="init" v-if="wantsFix">{{ $t('ui.setup.cancel') }}</button>
                     </div>
                 </main>
@@ -89,17 +134,27 @@
             <template v-else>
                 <main class="setup__form" v-bind:key="'confirmation'">
                     <div class="setup__fields setup__fields--center">
-                        <svg class="setup__check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z" /></svg>
+                        <svg class="setup__check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path
+                                d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z"
+                            />
+                        </svg>
                         <p class="setup__fielddesc">{{ $t('ui.setup.document-root.success') }}</p>
                         <i18n-t tag="p" class="setup__fielddesc" :keypath="`ui.setup.document-root.${contaoVersion ? 'installed' : 'installing'}ProjectDir`">
-                            <template #dir><code>{{ projectDir }}</code></template>
+                            <template #dir
+                                ><code>{{ projectDir }}</code></template
+                            >
                         </i18n-t>
                         <i18n-t tag="p" class="setup__fielddesc" :keypath="`ui.setup.document-root.${contaoVersion ? 'installed' : 'installing'}PublicDir`">
-                            <template #dir><code>{{ publicDir }}</code></template>
+                            <template #dir
+                                ><code>{{ publicDir }}</code></template
+                            >
                         </i18n-t>
                     </div>
                     <div class="setup__actions setup__actions--center">
-                        <button class="widget-button widget-button--inline widget-button--gear" @click="wantsFix = true" v-if="!contaoVersion">{{ $t('ui.setup.document-root.change') }}</button>
+                        <button class="widget-button widget-button--inline widget-button--gear" @click="wantsFix = true" v-if="!contaoVersion">
+                            {{ $t('ui.setup.document-root.change') }}
+                        </button>
                         <button class="widget-button widget-button--inline widget-button--primary" @click="$emit('continue')">{{ $t('ui.setup.continue') }}</button>
                     </div>
                 </main>
@@ -228,7 +283,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .setup {
     &__directories {

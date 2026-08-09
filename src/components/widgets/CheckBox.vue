@@ -4,17 +4,19 @@
             <input
                 ref="input"
                 type="checkbox"
-                :id="label ? 'ctrl_'+name : ''"
+                :id="label ? 'ctrl_' + name : ''"
                 :name="name"
                 :disabled="disabled"
                 :required="required"
                 :checked="modelValue || null"
                 @change="toggle($event.target.checked)"
             />
-            <label v-if="label" :for="'ctrl_'+name">{{ label }}</label>
+            <label v-if="label" :for="'ctrl_' + name">{{ label }}</label>
         </div>
         <div class="widget__description" :class="{ 'widget__description--disabled': disabled }" v-if="description || $slots.description">
-            <slot name="description"><p>{{ description }}</p></slot>
+            <slot name="description"
+                ><p>{{ description }}</p></slot
+            >
         </div>
     </div>
 </template>
@@ -66,19 +68,19 @@ export default {
         text-align: left;
 
         &:before {
-            content: "";
+            content: '';
             position: absolute;
             left: 0;
             width: 20px;
             height: 20px;
-            background: url("../../assets/images/widget-checkbox--off.svg") 0 0 no-repeat;
+            background: url('../../assets/images/widget-checkbox--off.svg') 0 0 no-repeat;
             background-size: 20px 20px;
         }
     }
 
     input:checked + label {
         &:before {
-            background-image: url("../../assets/images/widget-checkbox--on.svg");
+            background-image: url('../../assets/images/widget-checkbox--on.svg');
         }
     }
 

@@ -16,7 +16,15 @@
                         <select-menu :options="fileOptions" name="file" :label="$t('ui.log-viewer.file')" v-model="file" />
                         <button class="widget-button widget-button--inline widget-button--update" :title="$t('ui.log-viewer.reload')" @click="load"></button>
                     </div>
-                    <a :href="`api/logs/${encodeURIComponent(file)}`" :download="`${file}.log`" target="_blank" class="widget-button widget-button--inline widget-button--download" :class="{ disabled: !file }" :title="$t('ui.log-viewer.downloadTitle', { file: `${file}.log` })">{{ $t('ui.log-viewer.download') }}</a>
+                    <a
+                        :href="`api/logs/${encodeURIComponent(file)}`"
+                        :download="`${file}.log`"
+                        target="_blank"
+                        class="widget-button widget-button--inline widget-button--download"
+                        :class="{ disabled: !file }"
+                        :title="$t('ui.log-viewer.downloadTitle', { file: `${file}.log` })"
+                        >{{ $t('ui.log-viewer.download') }}</a
+                    >
                 </div>
                 <div>
                     <select-menu :options="channelOptions" name="channel" :label="$t('ui.log-viewer.channel')" v-model="channel" />
@@ -39,18 +47,39 @@
                         <div :class="`log-viewer__line log-viewer__line--${line.level.toLowerCase()}`" v-else>
                             <div class="log-viewer__meta">
                                 <time class="log-viewer__datetime" :datetime="line.datetime">{{ datimFormat(line.datetime, 'medium') }}</time>
-                                <span :class="`log-viewer__badge log-viewer__badge--desktop log-viewer__badge--level-${line.level.toLowerCase()}`" :title="$t('ui.log-viewer.levelTitle')">{{ line.level }}</span>
-                                <span class="log-viewer__badge log-viewer__badge--desktop log-viewer__badge--channel" :title="$t('ui.log-viewer.channelTitle')">{{ line.channel }}</span>
+                                <span
+                                    :class="`log-viewer__badge log-viewer__badge--desktop log-viewer__badge--level-${line.level.toLowerCase()}`"
+                                    :title="$t('ui.log-viewer.levelTitle')"
+                                    >{{ line.level }}</span
+                                >
+                                <span class="log-viewer__badge log-viewer__badge--desktop log-viewer__badge--channel" :title="$t('ui.log-viewer.channelTitle')">{{
+                                    line.channel
+                                }}</span>
                             </div>
                             <div class="log-viewer__content">
                                 <div class="log-viewer__message">
                                     <span v-for="(piece, k) in pieces(line.message)" :key="k">{{ piece }}</span>
                                 </div>
                                 <div class="log-viewer__details">
-                                    <span :class="`log-viewer__badge log-viewer__badge--mobile log-viewer__badge--level-${line.level.toLowerCase()}`" :title="$t('ui.log-viewer.levelTitle')">{{ line.level }}</span>
-                                    <span class="log-viewer__badge log-viewer__badge--mobile log-viewer__badge--channel" :title="$t('ui.log-viewer.channelTitle')">{{ line.channel }}</span>
-                                    <button class="log-viewer__toggle" :class="{ 'log-viewer__toggle--active': showContext[k] }" v-if="canShow(line.context)" @click="toggleContext(k)">{{ $t(`ui.log-viewer.${showContext[k] ? 'hide' : 'show'}Context`) }}</button>
-                                    <button class="log-viewer__toggle" :class="{ 'log-viewer__toggle--active': showExtra[k] }" v-if="canShow(line.extra)" @click="toggleExtra(k)">{{ $t(`ui.log-viewer.${showExtra[k] ? 'hide' : 'show'}Extra`) }}</button>
+                                    <span
+                                        :class="`log-viewer__badge log-viewer__badge--mobile log-viewer__badge--level-${line.level.toLowerCase()}`"
+                                        :title="$t('ui.log-viewer.levelTitle')"
+                                        >{{ line.level }}</span
+                                    >
+                                    <span class="log-viewer__badge log-viewer__badge--mobile log-viewer__badge--channel" :title="$t('ui.log-viewer.channelTitle')">{{
+                                        line.channel
+                                    }}</span>
+                                    <button
+                                        class="log-viewer__toggle"
+                                        :class="{ 'log-viewer__toggle--active': showContext[k] }"
+                                        v-if="canShow(line.context)"
+                                        @click="toggleContext(k)"
+                                    >
+                                        {{ $t(`ui.log-viewer.${showContext[k] ? 'hide' : 'show'}Context`) }}
+                                    </button>
+                                    <button class="log-viewer__toggle" :class="{ 'log-viewer__toggle--active': showExtra[k] }" v-if="canShow(line.extra)" @click="toggleExtra(k)">
+                                        {{ $t(`ui.log-viewer.${showExtra[k] ? 'hide' : 'show'}Extra`) }}
+                                    </button>
                                 </div>
 
                                 <vue-json-pretty :data="line.context" :deep="1" class="log-viewer__json" v-if="canShow(line.context) && showContext[k]" />
@@ -133,21 +162,24 @@ export default {
 
         current: (vm) => vm.files?.find((f) => f.name === vm.file),
 
-        lines: (vm) => vm.content?.filter((line) => {
-            if (typeof line === 'string') {
-                return true;
-            }
+        lines: (vm) =>
+            vm.content
+                ?.filter((line) => {
+                    if (typeof line === 'string') {
+                        return true;
+                    }
 
-            if (vm.channel && line.channel !== vm.channel) {
-                return false;
-            }
+                    if (vm.channel && line.channel !== vm.channel) {
+                        return false;
+                    }
 
-            if (vm.level && line.level.toLowerCase() !== vm.level) {
-                return false;
-            }
+                    if (vm.level && line.level.toLowerCase() !== vm.level) {
+                        return false;
+                    }
 
-            return true;
-        }).reverse(),
+                    return true;
+                })
+                .reverse(),
     },
 
     methods: {
@@ -216,7 +248,9 @@ export default {
                 options[line[key].toLowerCase()] += 1;
             });
 
-            return [{ label: 'all', value: '' }].concat(Object.keys(options).map((value) => ({ value, label: `${value.at(0).toUpperCase()}${value.slice(1)} (${options[value]})` })));
+            return [{ label: 'all', value: '' }].concat(
+                Object.keys(options).map((value) => ({ value, label: `${value.at(0).toUpperCase()}${value.slice(1)} (${options[value]})` })),
+            );
         },
 
         next() {
@@ -274,7 +308,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .log-viewer {
     &__status {
@@ -398,7 +432,7 @@ export default {
         &--critical,
         &--emergency {
             &:before {
-                content: "";
+                content: '';
                 position: absolute;
                 left: 0;
                 top: -1px;

@@ -11,8 +11,17 @@
 
                 <fieldset class="maintenance__actions" v-if="!safeMode && isSupported !== false">
                     <loading-spinner class="maintenance__loader" v-if="isLocked === null" />
-                    <loading-button class="widget-button widget-button--primary widget-button--unlock" :loading="loading" :disabled="!isSupported" v-else-if="isLocked" @click="unlock">{{ $t('ui.maintenance.installTool.unlock') }}</loading-button>
-                    <loading-button class="widget-button widget-button--primary widget-button--lock" :loading="loading" :disabled="!isSupported" v-else @click="lock">{{ $t('ui.maintenance.installTool.lock') }}</loading-button>
+                    <loading-button
+                        class="widget-button widget-button--primary widget-button--unlock"
+                        :loading="loading"
+                        :disabled="!isSupported"
+                        v-else-if="isLocked"
+                        @click="unlock"
+                        >{{ $t('ui.maintenance.installTool.unlock') }}</loading-button
+                    >
+                    <loading-button class="widget-button widget-button--primary widget-button--lock" :loading="loading" :disabled="!isSupported" v-else @click="lock">{{
+                        $t('ui.maintenance.installTool.lock')
+                    }}</loading-button>
                 </fieldset>
             </div>
         </section>

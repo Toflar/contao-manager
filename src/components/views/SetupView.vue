@@ -9,7 +9,10 @@
                 </li>
                 <li :class="{ active: currentStep > steps.length }">
                     <button disabled>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+                        </svg>
                     </button>
                 </li>
             </ul>
@@ -34,7 +37,14 @@
                 <figure><img src="~contao-package-list/src/assets/images/funding.svg" width="80" height="80" alt="" /></figure>
                 <div>
                     <p v-for="(line, i) in $t('ui.setup.funding').split('\n')" :key="i">{{ line }}</p>
-                    <p><a class="view-setup__funding-link widget-button widget-button--small widget-button--funding widget-button--link" href="https://to.contao.org/donate" target="_blank">{{ $t('ui.setup.fundingLink') }}</a></p>
+                    <p>
+                        <a
+                            class="view-setup__funding-link widget-button widget-button--small widget-button--funding widget-button--link"
+                            href="https://to.contao.org/donate"
+                            target="_blank"
+                            >{{ $t('ui.setup.fundingLink') }}</a
+                        >
+                    </p>
                 </div>
             </div>
         </main>
@@ -46,7 +56,9 @@
             <h1 class="view-setup__headline">{{ $t('ui.setup.welcome') }}</h1>
             <p class="view-setup__description">{{ $t('ui.setup.welcome1') }}</p>
             <i18n-t tag="p" class="view-setup__description" keypath="ui.setup.welcome2">
-                <template #support><a href="https://to.contao.org/support" target="_blank">{{ $t('ui.setup.support') }}</a></template>
+                <template #support
+                    ><a href="https://to.contao.org/support" target="_blank">{{ $t('ui.setup.support') }}</a></template
+                >
             </i18n-t>
             <button class="widget-button widget-button--inline widget-button--primary view-setup__start" @click="currentStep = 1">{{ $t('ui.setup.start') }}</button>
         </main>
@@ -136,7 +148,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .view-setup {
     padding-top: 40px;
@@ -166,7 +178,7 @@ export default {
             padding: 0;
 
             &:before {
-                content: "";
+                content: '';
                 position: absolute;
                 left: -50%;
                 right: 50%;
@@ -175,7 +187,7 @@ export default {
             }
 
             &:after {
-                content: "";
+                content: '';
                 position: absolute;
                 top: -18px;
                 left: 50%;

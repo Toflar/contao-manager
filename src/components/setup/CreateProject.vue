@@ -122,15 +122,11 @@
 
                 <ul class="setup__versions">
                     <template v-for="version in visibleVersions">
-                        <li class="setup__version" :key="version.value" v-if="version.disabled">
+                        <li class="setup__version" :key="version.value" v-if="version.description">
                             <strong>{{ version.label }}</strong>
                             <br />
-                            <span class="setup__version--warning">{{ version.problem }}</span>
-                        </li>
-                        <li class="setup__version" :key="version.value" v-else-if="version.description">
-                            <strong>{{ version.label }}</strong>
-                            <br />
-                            {{ version.description }}
+                            <span class="setup__version--warning" v-if="version.disabled">{{ version.problem }}</span>
+                            <template v-else>{{ version.description }}</template>
                         </li>
                     </template>
                 </ul>

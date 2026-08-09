@@ -10,17 +10,39 @@
                 <template v-for="(user, k) in users" :key="k">
                     <div class="user-manager__item">
                         <div class="user-manager__ribbon" v-if="currentUser === user.username">{{ $t('ui.user-manager.you') }}</div>
-                        <div class="user-manager__ribbon user-manager__ribbon--hint user-manager__ribbon--primary" :title="$t('ui.user-manager.passkeyTitle')" v-else-if="user.passkey">{{ $t('ui.user-manager.passkey') }}</div>
-                        <div class="user-manager__ribbon user-manager__ribbon--hint user-manager__ribbon--primary" :title="$t('ui.user-manager.2faEnabled')" v-else-if="user.totp_enabled">{{ $t('ui.user-manager.2fa') }}</div>
-                        <div class="user-manager__ribbon user-manager__ribbon--hint user-manager__ribbon--warning" :title="$t('ui.user-manager.2faDisabled')" v-else>{{ $t('ui.user-manager.2fa') }}</div>
+                        <div
+                            class="user-manager__ribbon user-manager__ribbon--hint user-manager__ribbon--primary"
+                            :title="$t('ui.user-manager.passkeyTitle')"
+                            v-else-if="user.passkey"
+                        >
+                            {{ $t('ui.user-manager.passkey') }}
+                        </div>
+                        <div
+                            class="user-manager__ribbon user-manager__ribbon--hint user-manager__ribbon--primary"
+                            :title="$t('ui.user-manager.2faEnabled')"
+                            v-else-if="user.totp_enabled"
+                        >
+                            {{ $t('ui.user-manager.2fa') }}
+                        </div>
+                        <div class="user-manager__ribbon user-manager__ribbon--hint user-manager__ribbon--warning" :title="$t('ui.user-manager.2faDisabled')" v-else>
+                            {{ $t('ui.user-manager.2fa') }}
+                        </div>
                         <div class="user-manager__username">{{ user.username }}</div>
                         <user-scope readonly label="Permissions" :model-value="user.scope" class="user-manager__scope" />
                         <div class="user-manager__spacer"></div>
 
-                        <button class="widget-button" @click="changePassword" v-if="currentUser === user.username && !hasPasskey">{{ $t('ui.user-manager.changePassword') }}</button>
-                        <button class="widget-button" @click="setupTotp" v-if="currentUser === user.username && !hasPasskey && !hasTotp">{{ $t('ui.user-manager.setupTotp') }}</button>
-                        <button class="widget-button" @click="disableTotp" v-if="currentUser === user.username && !hasPasskey && hasTotp">{{ $t('ui.user-manager.disableTotp') }}</button>
-                        <button class="widget-button widget-button--alert widget-button--trash" @click="deleteUser(user.username)" v-if="currentUser !== user.username">{{ $t('ui.user-manager.delete') }}</button>
+                        <button class="widget-button" @click="changePassword" v-if="currentUser === user.username && !hasPasskey">
+                            {{ $t('ui.user-manager.changePassword') }}
+                        </button>
+                        <button class="widget-button" @click="setupTotp" v-if="currentUser === user.username && !hasPasskey && !hasTotp">
+                            {{ $t('ui.user-manager.setupTotp') }}
+                        </button>
+                        <button class="widget-button" @click="disableTotp" v-if="currentUser === user.username && !hasPasskey && hasTotp">
+                            {{ $t('ui.user-manager.disableTotp') }}
+                        </button>
+                        <button class="widget-button widget-button--alert widget-button--trash" @click="deleteUser(user.username)" v-if="currentUser !== user.username">
+                            {{ $t('ui.user-manager.delete') }}
+                        </button>
                     </div>
                 </template>
             </div>
@@ -97,7 +119,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .user-manager {
     &__loading {

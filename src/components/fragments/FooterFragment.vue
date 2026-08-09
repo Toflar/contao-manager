@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .fragment-footer {
     width: 280px;
@@ -84,7 +84,7 @@ export default {
             display: inline-block;
 
             &:not(:first-child):before {
-                content: "|";
+                content: '|';
                 padding: 0 10px 0 8px;
             }
         }

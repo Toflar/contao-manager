@@ -14,7 +14,9 @@
         <div class="layout-main__subheader" v-if="$slots.search">
             <div class="layout-main__subheader-inside">
                 <div class="layout-main__news" v-if="currentNews">
-                    <a :href="currentNews.url" :title="currentNews.title" target="_blank" rel="noreferrer noopener"><img :src="currentNews.image" width="320" height="50" :alt="currentNews.title" /></a>
+                    <a :href="currentNews.url" :title="currentNews.title" target="_blank" rel="noreferrer noopener"
+                        ><img :src="currentNews.image" width="320" height="50" :alt="currentNews.title"
+                    /></a>
                 </div>
 
                 <slot name="search" />
@@ -54,7 +56,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .layout-main {
     overflow: hidden;

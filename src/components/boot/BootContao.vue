@@ -71,10 +71,7 @@ export default {
             }
 
             if (bootState === 'success' && this.isGranted(scopes.UPDATE)) {
-                await Promise.all([
-                    this.$store.dispatch('contao/install-tool/fetch', false),
-                    this.$store.dispatch('server/database/get', false),
-                ]);
+                await Promise.all([this.$store.dispatch('contao/install-tool/fetch', false), this.$store.dispatch('server/database/get', false)]);
 
                 if (this.databaseSupported) {
                     if (this.databaseAccessProblem) {

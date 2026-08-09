@@ -1,6 +1,13 @@
 <template>
     <div class="cloud-status" @mouseenter="open" @mouseleave="close" v-if="enabled">
-        <loading-button :class="`cloud-status__button ${buttonClass}`" color="info" :icon="hasError ? 'cloud-off' : 'cloud'" :loading="isLoading" :disabled="hasError" @click="open">
+        <loading-button
+            :class="`cloud-status__button ${buttonClass}`"
+            color="info"
+            :icon="hasError ? 'cloud-off' : 'cloud'"
+            :loading="isLoading"
+            :disabled="hasError"
+            @click="open"
+        >
             <template v-if="isReady">{{ $t('ui.cloudStatus.approx', { minutes: approxMinutes }) }}</template>
         </loading-button>
 
@@ -28,7 +35,8 @@
                 href="https://composer-resolver-cloud.statuspage.io/"
                 target="_blank"
                 rel="noreferrer noopener"
-            >{{ $t('ui.cloudStatus.button') }}</a>
+                >{{ $t('ui.cloudStatus.button') }}</a
+            >
         </div>
 
         <div class="cloud-status__popup cloud-status__popup--error" tabindex="-1" v-else-if="hasError">
@@ -39,7 +47,8 @@
                 href="https://composer-resolver-cloud.statuspage.io/"
                 target="_blank"
                 rel="noreferrer noopener"
-            >{{ $t('ui.cloudStatus.button') }}</a>
+                >{{ $t('ui.cloudStatus.button') }}</a
+            >
             <button class="widget-button widget-button--update widget-button--small" @click="refreshCloud" :title="$t('ui.cloudStatus.approxError')"></button>
         </div>
     </div>
@@ -163,7 +172,7 @@ export default {
             border-style: solid;
             border-width: 4px 3.5px 0 3.5px;
             border-color: var(--contao) transparent transparent transparent;
-            content: "";
+            content: '';
         }
 
         &--error {

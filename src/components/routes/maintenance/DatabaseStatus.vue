@@ -14,7 +14,9 @@
                     <p>{{ $t('ui.maintenance.database.description') }}</p>
                     <br />
                     <p v-if="!supportsBackups && !loadingBackups">{{ $t('ui.maintenance.database.backupUnsupported') }}</p>
-                    <p v-else-if="supportsBackups && backupFiles.length">{{ $tc('ui.maintenance.database.backupList', backupFiles.length, { date: datimFormat(backupFiles[0].createdAt) }) }}</p>
+                    <p v-else-if="supportsBackups && backupFiles.length">
+                        {{ $tc('ui.maintenance.database.backupList', backupFiles.length, { date: datimFormat(backupFiles[0].createdAt) }) }}
+                    </p>
                     <p v-else-if="supportsBackups">{{ $t('ui.maintenance.database.backupEmpty') }}</p>
                 </div>
                 <fieldset class="maintenance__actions">
@@ -23,13 +25,16 @@
                     <button class="widget-button widget-button--alert" v-else-if="hasError" @click="checkMigrations">{{ $t('ui.maintenance.database.button') }}</button>
                     <button-group
                         :label="$t('ui.maintenance.database.button')"
-                        :type="(hasChanges || hasWarning) ? 'warning' : 'primary'" icon="database"
+                        :type="hasChanges || hasWarning ? 'warning' : 'primary'"
+                        icon="database"
                         @click="checkMigrations"
                         v-else
                     >
-                        <link-menu align="right" :items="advancedActions()" :color="hasChanges ? 'warning' : 'primary'"/>
+                        <link-menu align="right" :items="advancedActions()" :color="hasChanges ? 'warning' : 'primary'" />
                     </button-group>
-                    <loading-button class="widget-button" @click="createBackup" :disabled="!supportsBackups" :loading="loadingBackups">{{ $t('ui.maintenance.database.createBackup') }}</loading-button>
+                    <loading-button class="widget-button" @click="createBackup" :disabled="!supportsBackups" :loading="loadingBackups">{{
+                        $t('ui.maintenance.database.createBackup')
+                    }}</loading-button>
                 </fieldset>
             </div>
         </section>

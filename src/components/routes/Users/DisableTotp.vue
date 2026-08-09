@@ -2,13 +2,7 @@
     <popup-overlay class="disable-totp" :headline="$t('ui.totp.headline')" @submit="submit" @clear="close">
         <p class="disable-totp__text">{{ $t('ui.totp.disableText') }}</p>
 
-        <text-field
-            ref="totp" name="totp"
-            required pattern="\d+" minlength="6" maxlength="6"
-            autocomplete="one-time-code"
-            :error="error" @keyup="error = ''"
-            v-model="totp"
-        />
+        <text-field ref="totp" name="totp" required pattern="\d+" minlength="6" maxlength="6" autocomplete="one-time-code" :error="error" @keyup="error = ''" v-model="totp" />
 
         <template #actions>
             <button type="button" class="widget-button" :disabled="loading" @click="close">{{ $t('ui.totp.cancel') }}</button>

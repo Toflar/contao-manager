@@ -17,7 +17,10 @@
 
             <div class="clearfix"></div>
             <div class="view-boot__summary view-boot__summary--error" v-if="hasError">
-                <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                </svg>
                 <h1 class="view-boot__issue">{{ $t('ui.boot.issue1') }}</h1>
                 <p class="view-boot__issue">{{ $t('ui.boot.issue2') }}</p>
                 <button @click="runSafeMode" class="widget-button widget-button--warning view-boot__safeMode" v-if="safeMode">{{ $t('ui.boot.safeMode') }}</button>
@@ -65,19 +68,19 @@ export default {
 
         isOAuth: (vm) => vm.$route.name === routes.oauth.name,
         hasError: (vm) => Object.values(vm.status).indexOf('error') !== -1,
-        autoContinue: (vm) => window.localStorage.getItem('contao_manager_booted') === '1'
-            && Object.values(vm.status).indexOf('error') === -1
-            && Object.values(vm.status).indexOf('action') === -1
-            && Object.values(vm.status).indexOf('warning') === -1,
+        autoContinue: (vm) =>
+            window.localStorage.getItem('contao_manager_booted') === '1' &&
+            Object.values(vm.status).indexOf('error') === -1 &&
+            Object.values(vm.status).indexOf('action') === -1 &&
+            Object.values(vm.status).indexOf('warning') === -1,
 
-        canContinue: (vm) => Object.values(vm.status).indexOf(null) === -1
-            && Object.values(vm.status).indexOf('error') === -1
-            && Object.values(vm.status).indexOf('action') === -1,
+        canContinue: (vm) => Object.values(vm.status).indexOf(null) === -1 && Object.values(vm.status).indexOf('error') === -1 && Object.values(vm.status).indexOf('action') === -1,
 
-        shouldContinue: (vm) => Object.values(vm.status).indexOf(null) === -1
-            && Object.values(vm.status).indexOf('error') === -1
-            && Object.values(vm.status).indexOf('action') === -1
-            && Object.values(vm.status).indexOf('warning') === -1,
+        shouldContinue: (vm) =>
+            Object.values(vm.status).indexOf(null) === -1 &&
+            Object.values(vm.status).indexOf('error') === -1 &&
+            Object.values(vm.status).indexOf('action') === -1 &&
+            Object.values(vm.status).indexOf('warning') === -1,
     },
 
     methods: {
@@ -149,7 +152,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .view-boot {
     &__header {

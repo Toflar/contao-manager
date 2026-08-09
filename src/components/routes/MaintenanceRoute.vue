@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .maintenance {
     margin-bottom: 14px;
@@ -79,7 +79,7 @@ export default {
             border-radius: var(--border-radius);
             overflow: hidden;
             aspect-ratio: 1;
-            object-fit:contain;
+            object-fit: contain;
         }
 
         @include defaults.screen(1024) {

@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .file-tree {
     margin: 0;
@@ -65,7 +65,7 @@ export default {
         padding-left: 20px;
 
         &:before {
-            content: "";
+            content: '';
             position: absolute;
             left: 10px;
             top: 6px;

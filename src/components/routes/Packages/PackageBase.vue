@@ -2,8 +2,17 @@
     <main-layout>
         <section class="package-tools" v-if="isGranted(scopes.UPDATE)">
             <slot name="search">
-                <button class="package-tools__button widget-button widget-button--update" :disabled="totalChanges > 0 || uploading" @click="updateAll">{{ $t('ui.packages.updateButton') }}</button>
-                <button class="package-tools__button widget-button widget-button--upload" :disabled="!uploads || uploading || !isGranted(scopes.INSTALL)" :title="uploadError" @click.prevent="$emit('start-upload')">{{ $t('ui.packages.uploadButton') }}</button>
+                <button class="package-tools__button widget-button widget-button--update" :disabled="totalChanges > 0 || uploading" @click="updateAll">
+                    {{ $t('ui.packages.updateButton') }}
+                </button>
+                <button
+                    class="package-tools__button widget-button widget-button--upload"
+                    :disabled="!uploads || uploading || !isGranted(scopes.INSTALL)"
+                    :title="uploadError"
+                    @click.prevent="$emit('start-upload')"
+                >
+                    {{ $t('ui.packages.uploadButton') }}
+                </button>
             </slot>
         </section>
 
@@ -52,7 +61,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .package-tools {
     position: relative;

@@ -11,7 +11,12 @@
         <div class="feature-package__actions">
             <button class="feature-package__restore" @click="restore" v-if="packageHint && isGranted(scopes.INSTALL)">{{ $t('ui.package.hintRevert') }}</button>
             <details-button small :name="name" />
-            <button :title="$t('ui.package.removeButton')" class="widget-button widget-button--alert widget-button--trash widget-button--small" @click="uninstall" v-if="(isRequired || isRootInstalled) && !willBeRemoved && isGranted(scopes.INSTALL)"></button>
+            <button
+                :title="$t('ui.package.removeButton')"
+                class="widget-button widget-button--alert widget-button--trash widget-button--small"
+                @click="uninstall"
+                v-if="(isRequired || isRootInstalled) && !willBeRemoved && isGranted(scopes.INSTALL)"
+            ></button>
         </div>
     </article>
 </template>
@@ -67,7 +72,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "~contao-package-list/src/assets/styles/defaults";
+@use '~contao-package-list/src/assets/styles/defaults';
 
 .feature-package {
     display: flex;
@@ -80,7 +85,7 @@ export default {
         white-space: nowrap;
 
         &:after {
-            content: ": ";
+            content: ': ';
         }
     }
 

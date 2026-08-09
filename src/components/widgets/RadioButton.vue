@@ -1,6 +1,8 @@
 <template>
     <fieldset class="widget widget-radio-button" :class="{ 'widget--required': required }">
-        <legend v-if="label || $slots.label"><slot name="label">{{ label }}</slot></legend>
+        <legend v-if="label || $slots.label">
+            <slot name="label">{{ label }}</slot>
+        </legend>
         <div v-for="(option, k) in options" :key="k">
             <input
                 ref="input"
@@ -77,12 +79,12 @@ export default {
     label {
         display: block;
         padding-left: 25px;
-        background: url("../../assets/images/widget-radio--off.svg") 0 -1px no-repeat;
+        background: url('../../assets/images/widget-radio--off.svg') 0 -1px no-repeat;
         background-size: 20px 20px;
     }
 
     input:checked + label {
-        background-image: url("../../assets/images/widget-radio--on.svg");
+        background-image: url('../../assets/images/widget-radio--on.svg');
     }
 
     input:focus-visible + label {
