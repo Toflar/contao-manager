@@ -3,7 +3,7 @@ import { createStore } from 'vuex';
 import views from '../router/views';
 
 import auth from './auth';
-import algolia from 'contao-package-list/src/store/algolia';
+import search from 'contao-package-list/src/store/search';
 import cloud from './cloud';
 import config from './config';
 import modals from 'contao-package-list/src/store/modals';
@@ -13,7 +13,7 @@ import server from './server';
 import tasks from './tasks';
 
 const store = createStore({
-    modules: { auth, algolia, cloud, config, modals, packages, contao, server, tasks },
+    modules: { auth, search, cloud, config, modals, packages, contao, server, tasks },
 
     state: {
         view: views.INIT,

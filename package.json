@@ -16,7 +16,7 @@
         "@vueuse/core": "^13.0.0",
         "accessible-menu": "^4.2.0",
         "axios": "^1.7.9",
-        "contao-package-list": "git+https://github.com/contao/package-list.git#main",
+        "contao-package-list": "github:contao/package-list",
         "core-js": "^3.40.0",
         "details-element-polyfill": "^2.4.0",
         "jszip": "^3.10.1",

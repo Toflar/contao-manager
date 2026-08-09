@@ -146,7 +146,8 @@ export default {
                 try {
                     await this.$store.dispatch('packages/uploads/load');
                     await this.$store.dispatch('packages/load');
-                    await this.$store.dispatch('algolia/discover');
+                    this.$store.commit('search/setThemes', '0');
+                    await this.$store.dispatch('search/discover');
                 } catch (err) {
                     // do nothing
                 }

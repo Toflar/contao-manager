@@ -410,7 +410,7 @@ export default {
 
             try {
                 const params = {
-                    facetFilters: ['type:contao-theme'],
+                    themes: '1',
                     hitsPerPage: 10 * this.pages,
                 };
 
@@ -420,7 +420,7 @@ export default {
                     params.sorting = this.sorting;
                 }
 
-                const response = await this.$store.dispatch('algolia/findPackages', params);
+                const response = await this.$store.dispatch('search/findPackages', params);
 
                 this.hasMore = response.nbPages > 1;
 

@@ -214,7 +214,7 @@ export default {
                 return data;
             }
 
-            const metadata = await dispatch('algolia/getPackage', name, { root: true });
+            const metadata = await dispatch('search/getPackage', name, { root: true });
 
             if (!metadata) {
                 return data;
@@ -284,7 +284,7 @@ export default {
 
         async load({ state, commit, getters }, reset = true) {
             commit('clearInstalled');
-            commit('algolia/reset', null, { root: true });
+            commit('search/reset', null, { root: true });
 
             if (reset) {
                 commit('reset');

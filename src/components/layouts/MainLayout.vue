@@ -39,7 +39,7 @@ export default {
     components: { NavigationFragment, FooterFragment },
 
     computed: {
-        ...mapState('algolia', ['news']),
+        ...mapState('search', ['news']),
         ...mapGetters('server/contao', ['badgeTitle']),
 
         currentNews: (vm) => (vm.news.length ? vm.news[0] : null),

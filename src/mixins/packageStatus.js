@@ -100,7 +100,7 @@ export default {
 
     watch: {
         targetConstraint() {
-            this.$store.commit('algolia/uncache', this.data.name);
+            this.$store.commit('search/uncache', this.data.name);
             this.loadMetadata();
         },
     },
