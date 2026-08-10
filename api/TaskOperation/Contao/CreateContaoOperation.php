@@ -22,7 +22,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_INSTALL')]
 class CreateContaoOperation extends AbstractInlineOperation
 {
-    private const SUPPORTED_VERSIONS = ['4.13', '5.3', '5.7', '6.0'];
+    private const SUPPORTED_VERSIONS = ['4.13.*', '5.3.*', '5.7.*', '6.0.*@rc'];
 
     private readonly string|null $version;
 
@@ -48,7 +48,7 @@ class CreateContaoOperation extends AbstractInlineOperation
         }
 
         // We must use the kernel at runtime here because the parameter is not dynamic
-        // @noinspection ProjectDirParameter */
+        /** @noinspection ProjectDirParameter */
         if ($kernel->getProjectDir() === $kernel->getPublicDir()) {
             throw new \RuntimeException('Cannot install without a public directory.');
         }
@@ -58,7 +58,7 @@ class CreateContaoOperation extends AbstractInlineOperation
 
     public function getSummary(): string
     {
-        return 'composer create-project contao/managed-edition:'.$this->version.'.* --no-install';
+        return 'composer create-project contao/managed-edition:'.$this->version.' --no-install';
     }
 
     protected function getName(): string
@@ -91,68 +91,44 @@ class CreateContaoOperation extends AbstractInlineOperation
 
     private function generateComposerJson(string $version, bool $coreOnly = false): string
     {
-        $coreBundle = '';
+        $data = [
+            'type' => 'project',
+            'require' => [
+                'contao/conflicts' => '@dev',
+                'contao/manager-bundle' => $version,
+            ],
+            'extra' => [
+                'public-dir' => basename((string) $this->publicDir),
+                'contao-component-dir' => 'assets',
+            ],
+            'scripts' => [
+                'post-install-cmd' => [
+                    '@php vendor/bin/contao-setup',
+                ],
+                'post-update-cmd' => [
+                    '@php vendor/bin/contao-setup',
+                ],
+            ],
+        ];
 
-        if ($this->isDevVersion($version)) {
-            $version .= '.x-dev';
-            $coreBundle = ',
-        "contao/core-bundle": "'.$version.'"';
-        } else {
-            $version .= '.*';
+        if ($this->isUnstable($version)) {
+            $data['require']['contao/core-bundle'] = $version;
         }
 
-        if ($coreOnly) {
-            $require = <<<JSON
-                        "contao/conflicts": "*@dev",
-                        "contao/manager-bundle": "{$version}"{$coreBundle}
-                JSON;
-        } else {
-            $require = <<<JSON
-                        "contao/conflicts": "*@dev",
-                        "contao/manager-bundle": "{$version}"{$coreBundle},
-                        "contao/calendar-bundle": "{$version}",
-                        "contao/comments-bundle": "{$version}",
-                        "contao/faq-bundle": "{$version}",
-                        "contao/listing-bundle": "{$version}",
-                        "contao/news-bundle": "{$version}",
-                        "contao/newsletter-bundle": "{$version}"
-                JSON;
+        if (!$coreOnly) {
+            $data['require']['contao/calendar-bundle'] = $version;
+            $data['require']['contao/comments-bundle'] = $version;
+            $data['require']['contao/faq-bundle'] = $version;
+            $data['require']['contao/listing-bundle'] = $version;
+            $data['require']['contao/news-bundle'] = $version;
+            $data['require']['contao/newsletter-bundle'] = $version;
         }
 
-        // https://github.com/contao/contao-manager/issues/627 Still needed since we
-        // allow Contao 4.9 for PHP < 7.4
-        if (version_compare($version, '4.12', '>=')) {
-            $publicDir = basename((string) $this->publicDir);
-            $script = '@php vendor/bin/contao-setup';
-        } else {
-            $publicDir = 'web';
-            $script = 'Contao\\\\ManagerBundle\\\\Composer\\\\ScriptHandler::initializeApplication';
-        }
-
-        return <<<JSON
-            {
-                "type": "project",
-                "require": {
-            {$require}
-                },
-                "extra": {
-                    "public-dir": "{$publicDir}",
-                    "contao-component-dir": "assets"
-                },
-                "scripts": {
-                    "post-install-cmd": [
-                        "{$script}"
-                    ],
-                    "post-update-cmd": [
-                        "{$script}"
-                    ]
-                }
-            }
-            JSON;
+        return json_encode($data, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
 
-    private function isDevVersion(string $version): bool
+    private function isUnstable(string $version): bool
     {
-        return '6.0' === $version;
+        return '6.0.*@rc' === $version;
     }
 }

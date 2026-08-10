@@ -277,7 +277,7 @@ export default {
         processing: false,
         isWeb: true,
 
-        version: '5.7',
+        version: '5.7.*',
         demo: false,
 
         view: 'require',
@@ -305,7 +305,7 @@ export default {
 
         versions: (vm) => [
             {
-                value: '6.0',
+                value: '6.0.*@rc',
                 label: `Contao 6.0 (${vm.$t('ui.setup.create-project.prereleaseTitle')})`,
                 disabled: vm.phpVersionId < 80400,
                 hidden: true,
@@ -314,21 +314,21 @@ export default {
                 problem: vm.$t('ui.setup.create-project.requiresPHP', { version: '8.4.0', current: vm.phpVersion }),
             },
             {
-                value: '5.7',
+                value: '5.7.*',
                 label: `Contao 5.7 (${vm.$t('ui.setup.create-project.latestTitle')})`,
                 disabled: vm.phpVersionId < 80300,
                 description: vm.$t('ui.setup.create-project.ltsText', { year: '2029' }),
                 problem: vm.$t('ui.setup.create-project.requiresPHP', { version: '8.3.0', current: vm.phpVersion }),
             },
             {
-                value: '5.3',
+                value: '5.3.*',
                 label: `Contao 5.3 (${vm.$t('ui.setup.create-project.ltsTitle')})`,
                 disabled: vm.phpVersionId < 80100,
                 description: vm.$t('ui.setup.create-project.pltsText', { year: '2027' }),
                 problem: vm.$t('ui.setup.create-project.requiresPHP', { version: '8.1.0', current: vm.phpVersion }),
             },
             {
-                value: '4.13',
+                value: '4.13.*',
                 label: `Contao 4.13 (${vm.$t('ui.setup.create-project.unsupportedTitle')})`,
                 disabled: vm.phpVersionId < 70400,
                 hidden: true,
