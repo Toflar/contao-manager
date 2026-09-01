@@ -22,7 +22,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_INSTALL')]
 class CreateContaoOperation extends AbstractInlineOperation
 {
-    private const SUPPORTED_VERSIONS = ['4.13.*', '5.3.*', '5.7.*', '6.0.*@rc'];
+    private const SUPPORTED_VERSIONS = ['4.13.*', '5.3.*', '5.7.*', '6.0.*'];
 
     private readonly string|null $version;
 
@@ -48,7 +48,6 @@ class CreateContaoOperation extends AbstractInlineOperation
         }
 
         // We must use the kernel at runtime here because the parameter is not dynamic
-        /** @noinspection ProjectDirParameter */
         if ($kernel->getProjectDir() === $kernel->getPublicDir()) {
             throw new \RuntimeException('Cannot install without a public directory.');
         }
@@ -129,6 +128,6 @@ class CreateContaoOperation extends AbstractInlineOperation
 
     private function isUnstable(string $version): bool
     {
-        return '6.0.*@rc' === $version;
+        return false;
     }
 }

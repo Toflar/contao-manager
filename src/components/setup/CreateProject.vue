@@ -305,17 +305,16 @@ export default {
 
         versions: (vm) => [
             {
-                value: '6.0.*@rc',
-                label: `Contao 6.0 (${vm.$t('ui.setup.create-project.prereleaseTitle')})`,
+                value: '6.0.*',
+                label: `Contao 6.0 (${vm.$t('ui.setup.create-project.latestTitle')})`,
                 disabled: vm.phpVersionId < 80400,
-                hidden: true,
-                demo: false,
-                description: vm.$t('ui.setup.create-project.prereleaseText'),
+                demo: true,
+                description: vm.$t('ui.setup.create-project.latestQ1', { year: '2027' }),
                 problem: vm.$t('ui.setup.create-project.requiresPHP', { version: '8.4.0', current: vm.phpVersion }),
             },
             {
                 value: '5.7.*',
-                label: `Contao 5.7 (${vm.$t('ui.setup.create-project.latestTitle')})`,
+                label: `Contao 5.7 (${vm.$t('ui.setup.create-project.ltsTitle')})`,
                 disabled: vm.phpVersionId < 80300,
                 description: vm.$t('ui.setup.create-project.ltsText', { year: '2029' }),
                 problem: vm.$t('ui.setup.create-project.requiresPHP', { version: '8.3.0', current: vm.phpVersion }),
