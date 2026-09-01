@@ -31,7 +31,7 @@ it:
             title: 'Impossibile scrivere sulla cartella temporanea di sistema.'
             detail: 'Questo è molto probabilmente un problema con la vostra configurazione di hosting. Assicurarsi che open_basedir permetta l''accesso alla directory temporanea o che sys_temp_dir sia configurato correttamente.'
         zip:
-            title: ''
+            title: 'Mancano sia l''estensione zip che i comandi unzip e 7z.'
 
     boot:
         composer:
@@ -76,7 +76,7 @@ it:
         remove-uploads:
             summary: 'Rimuovi uploads'
         remove-artifacts:
-            summary: ''
+            summary: 'Rimozione dei pacchetti caricati'
         composer-install:
             retry: 'riprova {current}/{max}'
             nothing: 'Niente da installare o aggiornare'
