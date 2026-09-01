@@ -105,6 +105,7 @@
         <echo message="Installing UI dependencies" />
         <exec executable="npm" dir="contao-manager-${version}" checkreturn="true">
             <arg value="install" />
+            <arg value="--allow-git=all" />
         </exec>
     </target>
 

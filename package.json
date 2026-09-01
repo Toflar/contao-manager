@@ -75,5 +75,17 @@
     "browserslist": [
         "defaults"
     ],
-    "packageManager": "npm@11.1.0"
+    "allowScripts": {
+        "@parcel/watcher": true,
+        "core-js": true,
+        "cwebp-bin": true,
+        "cypress": true,
+        "fsevents": true,
+        "gifsicle": true,
+        "mozjpeg": true,
+        "optipng-bin": true,
+        "pngquant-bin": true,
+        "sharp": true,
+        "yorkie": true
+    }
 }
