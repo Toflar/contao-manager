@@ -140,7 +140,7 @@ class InstallOperation extends AbstractProcessOperation
         $console = new ConsoleOutput();
         $console->add((string) $this->taskConfig->getState('install-output', ''));
         $console->add(
-            $process->getOutput().\sprintf(
+            $process->getOutput().$this->getProcessError().\sprintf(
                 "\n# Process terminated with exit code %s\n# Result: %s\n# Termination signal: %s\n",
                 $process->getExitCode(),
                 $process->getExitCodeText(),
@@ -148,6 +148,7 @@ class InstallOperation extends AbstractProcessOperation
             ),
             \sprintf("# Composer install attempt %d\n$ %s", $attempt, $process->getCommandLine()),
         );
+
         $this->taskConfig->setState('install-output', (string) $console);
     }
 
